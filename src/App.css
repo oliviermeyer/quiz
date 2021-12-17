@@ -1,12 +1,13 @@
 .App {
-  text-align: center;
   font-family: 'Helvetica Neue';
-  margin: 0;
+  padding: 2rem;
 }
 h1{
   font-family: 'Helvetica Neue';
   font-weight: lighter;
-  margin: 0;
+  font-size: 44px;
+  letter-spacing: 2px;
+  line-height: 52px;
 }
 .gradient {
   width: 100wh;
@@ -60,3 +61,27 @@ h1{
   }
 }
 
+.form-box{
+  border:1px solid rgba(255,255,255,.7);
+  border-radius: 14px;
+  padding: 1rem;
+  color:white;
+  margin-bottom: 1rem;
+}
+.form-box.checked{
+  background-color: white;
+  color:#EB5A5D;
+
+}
+.form-box.checked .css-hyxlzm{
+  color:#EB5A5D;
+}
+
+.form-footer{
+  padding:  0;
+  display: flex;
+  justify-content: space-between;
+}
+.form-footer button{
+  width: 100%;
+}

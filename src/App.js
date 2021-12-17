@@ -35,6 +35,8 @@ const ButtonCTA = styled(Button)({
     textTransform: 'none',
     backgroundColor: 'rgba(255,255,255,1)',
     color: '#F05A57',
+    height:'58px',
+    padding:'0 3rem',
     fontFamily: [
         '"Helvetica Neue"',
         'Arial',
@@ -57,7 +59,7 @@ const ButtonCTA = styled(Button)({
     },
     '&:disabled': {
         backgroundColor: 'rgba(255,255,255,.1)',
-        color: 'rgba(255,255,255,.3)',
+        color: 'rgba(235,90,93,.4)',
     },
 });
 const ButtonPrimary = styled(Button)({
@@ -65,6 +67,8 @@ const ButtonPrimary = styled(Button)({
     textTransform: 'none',
     backgroundColor: 'rgba(255,255,255,.5)',
     color: '#F05A57',
+    height:'58px',
+    padding:'0 3rem',
     fontFamily: [
         '"Helvetica Neue"',
         'Arial',
@@ -87,6 +91,7 @@ const ButtonPrimary = styled(Button)({
     },
     '&:disabled': {
         backgroundColor: 'rgba(255,255,255,.7)',
+        color: 'rgba(235,90,93,.4)',
     },
 });
 const RadioQuiz = styled(Radio)({
@@ -94,10 +99,6 @@ const RadioQuiz = styled(Radio)({
     width: 32,
     height: 32,
     color:'#FFFFFF',
-    '&:checked': {
-        backgroundColor: 'rgba(255,255,255,1)',
-        color:'red',
-    },
 });
 
 function App() {
@@ -309,7 +310,7 @@ function App() {
                             {test.questions[currentQuestion].answsers.map((answser) => (
 
 
-                                <div key={answser.id}>
+                                <div key={answser.id} className={"form-box" + (test.questions[currentQuestion].selected == answser.id ? ' checked' : '')}>
                                     <FormControlLabel onChange={handleOptionChange(answser.id)}
                                                       checked={test.questions[currentQuestion].selected == answser.id}
                                                       value={answser.id} control={<RadioQuiz/>} label={answser.label}/>
@@ -322,11 +323,15 @@ function App() {
                         </RadioGroup>
 
 
+
+                        <div className="form-footer">
+
                         {(currentQuestion > 0) ? <ButtonPrimary variant="contained" size="large"
                                                                   onClick={prevQuestion()}>Prev</ButtonPrimary> : ""}
                         <ButtonCTA variant="contained" size="large"
                                          disabled={test.questions[currentQuestion].selected == 0}
                                          onClick={nextQuestion()}>{currentQuestion == test.questions.length - 1 ? "View Result" : "Next"}</ButtonCTA>
+                    </div>
                     </div>
                     <label>Question {currentQuestion + 1 + "/" + test.questions.length}</label>
                 </div>
