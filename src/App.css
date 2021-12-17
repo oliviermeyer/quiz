@@ -1,6 +1,8 @@
 .App {
   font-family: 'Helvetica Neue';
   padding: 2rem;
+  display: flex;
+  justify-content: center;
 }
 h1{
   font-family: 'Helvetica Neue';
@@ -8,6 +10,9 @@ h1{
   font-size: 44px;
   letter-spacing: 2px;
   line-height: 52px;
+}
+.quiz{
+  max-width: 44rem;
 }
 .gradient {
   width: 100wh;
@@ -60,7 +65,15 @@ h1{
     background-position: 0% 50%
   }
 }
+.quiz{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+.quiz-form{
 
+}
 .form-box{
   border:1px solid rgba(255,255,255,.7);
   border-radius: 14px;
@@ -77,11 +90,11 @@ h1{
   color:#EB5A5D;
 }
 
-.form-footer{
+.quiz-footer{
   padding:  0;
   display: flex;
   justify-content: space-between;
 }
-.form-footer button{
+.quiz-footer button{
   width: 100%;
 }

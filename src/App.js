@@ -291,9 +291,10 @@ function App() {
         <div className="App gradient">
             <ThemeProvider theme={theme}><CssBaseline/>
 
+                <div>
+                    <div class="quiz">
 
-                <div style={{maxWidth: '44rem'}}>
-                    <div>
+                        <div class="quiz-form">
                         {/*                    total Extraverti: {test.results[0].score}<br/>
                     total Introverti: {test.results[1].score}*/}
                         <h1> {test.questions[currentQuestion].question}</h1>
@@ -321,10 +322,10 @@ function App() {
 
                             ))}
                         </RadioGroup>
+                        </div>
 
 
-
-                        <div className="form-footer">
+                        <div className="quiz-footer">
 
                         {(currentQuestion > 0) ? <ButtonPrimary variant="contained" size="large"
                                                                   onClick={prevQuestion()}>Prev</ButtonPrimary> : ""}
