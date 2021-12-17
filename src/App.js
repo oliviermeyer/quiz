@@ -5,7 +5,6 @@ import RadioGroup from '@mui/material/RadioGroup';
 import Radio from '@mui/material/Radio';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import './App.css';
-import {red} from '@mui/material/colors';
 import {ThemeProvider, createTheme, styled} from '@mui/material/styles';
 const theme = createTheme({
     palette: {
