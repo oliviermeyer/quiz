@@ -1,14 +1,22 @@
 import React, {useState} from "react";
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
+import Typography from '@mui/material/Typography';
 import RadioGroup from '@mui/material/RadioGroup';
 import Radio from '@mui/material/Radio';
+import Container from '@mui/material/Container';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import IconButton from '@mui/material/IconButton';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+
+import Slide from '@mui/material/Slide';
+import Icon from '@material-ui/core/Icon';
 import './App.css';
 import {ThemeProvider, createTheme, styled} from '@mui/material/styles';
 const theme = createTheme({
     palette: {
-        type: 'dark',
+        mode: 'dark',
         primary: {
             main: '#ffffff',
         },
@@ -58,8 +66,8 @@ const ButtonCTA = styled(Button)({
         boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
     },
     '&:disabled': {
-        backgroundColor: 'rgba(255,255,255,.1)',
-        color: 'rgba(235,90,93,.4)',
+        backgroundColor: 'rgba(255,255,255,.3)',
+        color: 'rgba(235,90,93,1)',
     },
 });
 const ButtonPrimary = styled(Button)({
@@ -249,7 +257,7 @@ function App() {
             }
         ]
     });
-
+    const [doSlide, setDoSlide] = useState(true);
 
     const handleOptionChange = index => e => {
         let newTest = Object.assign({}, test); // copying the old datas array
@@ -269,6 +277,7 @@ function App() {
 
     const nextQuestion = index => e => {
         console.log(currentQuestion + " / " + test.length)
+        setDoSlide(true);
         if (currentQuestion < test.questions.length - 1) gotToQuestion(currentQuestion + 1)
 
     }
@@ -285,19 +294,70 @@ function App() {
         return scoreO;
 
     }
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
 
 
     return (
         <div className="App gradient">
+
             <ThemeProvider theme={theme}><CssBaseline/>
+                <div className="topnav">
 
-                <div>
-                    <div class="quiz">
 
+
+
+
+                    {(currentQuestion > 0) ? <IconButton aria-label="back" onClick={prevQuestion()}>
+                        <Icon>arrow_back</Icon>
+                    </IconButton>: <div></div>}
+
+                    <div>
+                        <div></div>
+                       {/* <Button
+                            id="basic-button"
+                            aria-controls="basic-menu"
+                            aria-haspopup="true"
+                            aria-expanded={open ? 'true' : undefined}
+                            onClick={handleClick}
+                        >
+                            More...
+                        </Button>
+                        <Menu
+                            id="basic-menu"
+                            anchorEl={anchorEl}
+                            open={open}
+                            onClose={handleClose}
+                            MenuListProps={{
+                                'aria-labelledby': 'basic-button',
+                            }}
+                        >
+                            <MenuItem onClick={handleClose}>Profile</MenuItem>
+                            <MenuItem onClick={handleClose}>My account</MenuItem>
+                            <MenuItem onClick={handleClose}>Logout</MenuItem>
+                        </Menu>*/}
+                    </div>
+
+                </div>
+
+                <Container maxWidth="sm">
+
+                        <div class="quiz">
+                         <Slide  direction="down" in={doSlide}  mountOnEnter unmountOnExit>
                         <div class="quiz-form">
                         {/*                    total Extraverti: {test.results[0].score}<br/>
                     total Introverti: {test.results[1].score}*/}
-                        <h1> {test.questions[currentQuestion].question}</h1>
+
+
+                            <Typography variant="h2" component="div" gutterBottom>
+                                {test.questions[currentQuestion].question}
+                            </Typography>
 
                         <RadioGroup
                             aria-label="gender"
@@ -311,8 +371,8 @@ function App() {
                             {test.questions[currentQuestion].answsers.map((answser) => (
 
 
-                                <div key={answser.id} className={"form-box" + (test.questions[currentQuestion].selected == answser.id ? ' checked' : '')}>
-                                    <FormControlLabel onChange={handleOptionChange(answser.id)}
+                                <div key={answser.id}>
+                                    <FormControlLabel className={(test.questions[currentQuestion].selected == answser.id ? ' checked' : '')} onChange={handleOptionChange(answser.id)}
                                                       checked={test.questions[currentQuestion].selected == answser.id}
                                                       value={answser.id} control={<RadioQuiz/>} label={answser.label}/>
 
@@ -323,19 +383,26 @@ function App() {
                             ))}
                         </RadioGroup>
                         </div>
-
+                            </Slide>
 
                         <div className="quiz-footer">
+                            <div className="quiz-actions">
 
-                        {(currentQuestion > 0) ? <ButtonPrimary variant="contained" size="large"
-                                                                  onClick={prevQuestion()}>Prev</ButtonPrimary> : ""}
+
                         <ButtonCTA variant="contained" size="large"
                                          disabled={test.questions[currentQuestion].selected == 0}
                                          onClick={nextQuestion()}>{currentQuestion == test.questions.length - 1 ? "View Result" : "Next"}</ButtonCTA>
+
+                            </div>
+                            <div className="quiz-pager">
+                                <label>Question {currentQuestion + 1 + "/" + test.questions.length}</label>
+                            </div>
+
+
+                        </div>
                     </div>
-                    </div>
-                    <label>Question {currentQuestion + 1 + "/" + test.questions.length}</label>
-                </div>
+
+                </Container>
 
             </ThemeProvider></div>
     );
