@@ -305,7 +305,7 @@ function App() {
 
 
     return (
-        <div className="App gradient">
+        <Container root fixed={true} className="App gradient">
 
             <ThemeProvider theme={theme}><CssBaseline/>
                 <div className="topnav">
@@ -404,7 +404,7 @@ function App() {
 
                 </Container>
 
-            </ThemeProvider></div>
+            </ThemeProvider></Container>
     );
 }
 

@@ -1,8 +1,11 @@
 .App {
   font-family: 'Helvetica Neue';
+  height: 100%;
   display: flex;
   justify-content: center;
-  box-sizing: content-box;
+  align-content: space-between;
+
+
 }
 h1{
   font-family: 'Helvetica Neue';
@@ -23,8 +26,7 @@ h1{
   /*max-width: 44rem;*/
 }
 .gradient {
-  width: 100wh;
-  height: 100vh;
+
   color: #fff;
   background: linear-gradient(225deg, #8F39B2, #FC604D);
   background-size: 100% 100%;
@@ -84,7 +86,7 @@ h1{
 .quiz-form{
 
 }
-.css-jzcd7z-MuiFormControlLabel-root{
+.MuiFormControlLabel-root{
   border:1px solid rgba(255,255,255,.7);
   border-radius: 14px;
   padding: 1rem;
@@ -92,11 +94,11 @@ h1{
   margin-bottom: 1rem;
   width: 100%;
 }
- .css-jzcd7z-MuiFormControlLabel-root.checked{
+ .MuiFormControlLabel-root.checked{
   background-color: white;
   color:#EB5A5D;
 }
-.css-jzcd7z-MuiFormControlLabel-root.checked .css-hyxlzm{
+.MuiFormControlLabel-root.checked .css-hyxlzm{
   color:#EB5A5D;
 }
 
