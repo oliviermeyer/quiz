@@ -358,7 +358,7 @@ function App() {
                     total Introverti: {test.results[1].score}*/}
 
 
-                            <Typography variant="h2" component="h2" gutterBottom>
+                            <Typography variant="h4" component="h2" gutterBottom>
                                 {test.questions[currentQuestion].question}
                             </Typography>
 
