@@ -4,9 +4,9 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
 import RadioGroup from '@mui/material/RadioGroup';
 import Radio from '@mui/material/Radio';
-import Container from '@mui/material/Container';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import IconButton from '@mui/material/IconButton';
+import { useSpring, animated } from 'react-spring'
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
@@ -108,6 +108,7 @@ const RadioQuiz = styled(Radio)({
     height: 32,
     color:'#FFFFFF',
 });
+
 
 function App() {
 
@@ -303,9 +304,11 @@ function App() {
         setAnchorEl(null);
     };
 
+    const props = useSpring({ to: { opacity: 1 }, from: { opacity: 0 } });
+
 
     return (
-        <Container root fixed={true} className="App gradient">
+        <div  className="App ">
 
             <ThemeProvider theme={theme}><CssBaseline/>
                 <div className="topnav">
@@ -346,20 +349,20 @@ function App() {
 
                 </div>
 
-                <Container maxWidth="sm">
+                <div>
 
-                        <div class="quiz">
+                        <animated.div style={props} class="quiz">
                          <Slide  direction="down" in={doSlide}  mountOnEnter unmountOnExit>
                         <div class="quiz-form">
                         {/*                    total Extraverti: {test.results[0].score}<br/>
                     total Introverti: {test.results[1].score}*/}
 
 
-                            <Typography variant="h2" component="div" gutterBottom>
+                            <Typography variant="h2" component="h2" gutterBottom>
                                 {test.questions[currentQuestion].question}
                             </Typography>
 
-                        <RadioGroup
+                        <div className='quiz-answsers'> <RadioGroup
                             aria-label="gender"
                             defaultValue="female"
                             name="radio-buttons-group"
@@ -381,7 +384,7 @@ function App() {
 
 
                             ))}
-                        </RadioGroup>
+                        </RadioGroup></div>
                         </div>
                             </Slide>
 
@@ -389,7 +392,7 @@ function App() {
                             <div className="quiz-actions">
 
 
-                        <ButtonCTA variant="contained" size="large"
+                        <ButtonCTA style={{width:'100%'}} variant="contained" size="large"
                                          disabled={test.questions[currentQuestion].selected == 0}
                                          onClick={nextQuestion()}>{currentQuestion == test.questions.length - 1 ? "View Result" : "Next"}</ButtonCTA>
 
@@ -400,11 +403,11 @@ function App() {
 
 
                         </div>
-                    </div>
+                    </animated.div>
 
-                </Container>
+                </div>
 
-            </ThemeProvider></Container>
+            </ThemeProvider></div>
     );
 }
 
