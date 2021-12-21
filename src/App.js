@@ -111,7 +111,7 @@ const RadioQuiz = styled(Radio)({
 function App() {
 
 
-    const [currentQuestion, gotToQuestion] = useState(6);
+    const [currentQuestion, gotToQuestion] = useState(0);
     const [result, setResult] = useState(0);
     const [test, setTest] = useState({
         name: "Intro test",
