@@ -43,7 +43,7 @@ const ButtonCTA = styled(Button)({
     textTransform: 'none',
     backgroundColor: 'rgba(255,255,255,1)',
     color: '#F05A57',
-    height:'58px',
+    height:'50px',
     padding:'0 3rem',
     fontFamily: [
         '"Helvetica Neue"',
@@ -358,9 +358,9 @@ function App() {
                     total Introverti: {test.results[1].score}*/}
 
 
-                            <Typography variant="h4" component="h2" gutterBottom>
+                            <h2>
                                 {test.questions[currentQuestion].question}
-                            </Typography>
+                            </h2>
 
                         <div className='quiz-answsers'> <RadioGroup
                             aria-label="gender"
