@@ -1,12 +1,11 @@
 import React, {useState} from "react";
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
-import Typography from '@mui/material/Typography';
 import RadioGroup from '@mui/material/RadioGroup';
 import Radio from '@mui/material/Radio';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import IconButton from '@mui/material/IconButton';
-import { useSpring, animated } from 'react-spring'
+import {useSpring, animated} from 'react-spring'
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
@@ -14,6 +13,7 @@ import Slide from '@mui/material/Slide';
 import Icon from '@material-ui/core/Icon';
 import './App.css';
 import {ThemeProvider, createTheme, styled} from '@mui/material/styles';
+
 const theme = createTheme({
     palette: {
         mode: 'dark',
@@ -43,8 +43,8 @@ const ButtonCTA = styled(Button)({
     textTransform: 'none',
     backgroundColor: 'rgba(255,255,255,1)',
     color: '#F05A57',
-    height:'50px',
-    padding:'0 3rem',
+    height: '50px',
+    padding: '0 3rem',
     fontFamily: [
         '"Helvetica Neue"',
         'Arial',
@@ -75,8 +75,8 @@ const ButtonPrimary = styled(Button)({
     textTransform: 'none',
     backgroundColor: 'rgba(255,255,255,.5)',
     color: '#F05A57',
-    height:'58px',
-    padding:'0 3rem',
+    height: '58px',
+    padding: '0 3rem',
     fontFamily: [
         '"Helvetica Neue"',
         'Arial',
@@ -106,7 +106,7 @@ const RadioQuiz = styled(Radio)({
     borderRadius: '50%',
     width: 32,
     height: 32,
-    color:'#FFFFFF',
+    color: '#FFFFFF',
 });
 
 
@@ -259,6 +259,7 @@ function App() {
         ]
     });
     const [doSlide, setDoSlide] = useState(true);
+    const [animstate, setAnimState] = useState("in");
 
     const handleOptionChange = index => e => {
         let newTest = Object.assign({}, test); // copying the old datas array
@@ -279,7 +280,17 @@ function App() {
     const nextQuestion = index => e => {
         console.log(currentQuestion + " / " + test.length)
         setDoSlide(true);
-        if (currentQuestion < test.questions.length - 1) gotToQuestion(currentQuestion + 1)
+
+        setAnimState("in")
+        let timer = setTimeout(() => {
+            setAnimState("out")
+            console.log('end timer')
+            if (currentQuestion < test.questions.length - 1) gotToQuestion(currentQuestion + 1)
+            clearTimeout(timer)
+        }, 300);
+
+
+
 
     }
     const getScore0 = (index) => {
@@ -304,26 +315,23 @@ function App() {
         setAnchorEl(null);
     };
 
-    const props = useSpring({ to: { opacity: 1 }, from: { opacity: 0 } });
+    const props = useSpring({to: {opacity: 1}, from: {opacity: 0}});
 
 
     return (
-        <div  className="App ">
+        <div className="App ">
 
             <ThemeProvider theme={theme}><CssBaseline/>
                 <div className="topnav">
 
 
-
-
-
                     {(currentQuestion > 0) ? <IconButton aria-label="back" onClick={prevQuestion()}>
                         <Icon>arrow_back</Icon>
-                    </IconButton>: <div></div>}
+                    </IconButton> : <div></div>}
 
                     <div>
                         <div></div>
-                       {/* <Button
+                        {/* <Button
                             id="basic-button"
                             aria-controls="basic-menu"
                             aria-haspopup="true"
@@ -351,50 +359,52 @@ function App() {
 
                 <div>
 
-                        <animated.div style={props} class="quiz">
-                         <Slide  direction="down" in={doSlide}  mountOnEnter unmountOnExit>
-                        <div class="quiz-form">
-                        {/*                    total Extraverti: {test.results[0].score}<br/>
+                    <animated.div style={props} class="quiz">
+                        <Slide direction="down" in={doSlide} mountOnEnter unmountOnExit>
+                            <div className={(animstate == 'in' ? 'quiz-form in' : 'quiz-form out')}>
+                                {/*                    total Extraverti: {test.results[0].score}<br/>
                     total Introverti: {test.results[1].score}*/}
 
 
-                            <h2>
-                                {test.questions[currentQuestion].question}
-                            </h2>
+                                <h2>
+                                    {test.questions[currentQuestion].question}
+                                </h2>
 
-                        <div className='quiz-answsers'> <RadioGroup
-                            aria-label="gender"
-                            defaultValue="female"
-                            name="radio-buttons-group"
-                            style={{color:'#F05A57'}}
-                        >
-
-
-                            {/* map over the users array */}
-                            {test.questions[currentQuestion].answsers.map((answser) => (
+                                <div className='quiz-answsers'><RadioGroup
+                                    aria-label="gender"
+                                    defaultValue="female"
+                                    name="radio-buttons-group"
+                                    style={{color: '#F05A57'}}
+                                >
 
 
-                                <div key={answser.id}>
-                                    <FormControlLabel className={(test.questions[currentQuestion].selected == answser.id ? ' checked' : '')} onChange={handleOptionChange(answser.id)}
-                                                      checked={test.questions[currentQuestion].selected == answser.id}
-                                                      value={answser.id} control={<RadioQuiz/>} label={answser.label}/>
+                                    {/* map over the users array */}
+                                    {test.questions[currentQuestion].answsers.map((answser) => (
 
 
-                                </div>
+                                        <div key={answser.id}>
+                                            <FormControlLabel
+                                                className={(test.questions[currentQuestion].selected == answser.id ? ' checked' : '')}
+                                                onChange={handleOptionChange(answser.id)}
+                                                checked={test.questions[currentQuestion].selected == answser.id}
+                                                value={answser.id} control={<RadioQuiz/>} label={answser.label}/>
 
 
-                            ))}
-                        </RadioGroup></div>
-                        </div>
-                            </Slide>
+                                        </div>
+
+
+                                    ))}
+                                </RadioGroup></div>
+                            </div>
+                        </Slide>
 
                         <div className="quiz-footer">
                             <div className="quiz-actions">
 
 
-                        <ButtonCTA style={{width:'100%'}} variant="contained" size="large"
-                                         disabled={test.questions[currentQuestion].selected == 0}
-                                         onClick={nextQuestion()}>{currentQuestion == test.questions.length - 1 ? "View Result" : "Next"}</ButtonCTA>
+                                <ButtonCTA style={{width: '100%'}} variant="contained" size="large"
+                                           disabled={test.questions[currentQuestion].selected == 0}
+                                           onClick={nextQuestion()}>{currentQuestion == test.questions.length - 1 ? "View Result" : "Next"}</ButtonCTA>
 
                             </div>
                             <div className="quiz-pager">
