@@ -5,11 +5,11 @@ import RadioGroup from '@mui/material/RadioGroup';
 import Radio from '@mui/material/Radio';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import IconButton from '@mui/material/IconButton';
-import {useSpring, animated} from 'react-spring'
+
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
-import Slide from '@mui/material/Slide';
+
 import Icon from '@material-ui/core/Icon';
 import './App.css';
 import {ThemeProvider, createTheme, styled} from '@mui/material/styles';
@@ -258,9 +258,8 @@ function App() {
             }
         ]
     });
-    const [doSlide, setDoSlide] = useState(true);
     const [animstate, setAnimState] = useState("in");
-
+    const [showResults, setShowResults] = useState(false);
     const handleOptionChange = index => e => {
         let newTest = Object.assign({}, test); // copying the old datas array
         console.log(e.target.value);
@@ -274,22 +273,23 @@ function App() {
 
 
     const prevQuestion = index => e => {
+        setShowResults(false)
         if (currentQuestion > 0) gotToQuestion(currentQuestion - 1)
+
     }
 
     const nextQuestion = index => e => {
         console.log(currentQuestion + " / " + test.length)
-        setDoSlide(true);
 
         setAnimState("in")
         let timer = setTimeout(() => {
             setAnimState("out")
             console.log('end timer')
             if (currentQuestion < test.questions.length - 1) gotToQuestion(currentQuestion + 1)
+            if(currentQuestion >= test.questions.length -1 )setShowResults(true)
+
             clearTimeout(timer)
         }, 300);
-
-
 
 
     }
@@ -314,9 +314,67 @@ function App() {
     const handleClose = () => {
         setAnchorEl(null);
     };
+    function quiz() {
+        return <div>
+            <div className="quiz-form">
+                <h2>
+                    {test.questions[currentQuestion].question}
+                </h2>
 
-    const props = useSpring({to: {opacity: 1}, from: {opacity: 0}});
+                <div className='quiz-answsers'><RadioGroup
+                    aria-label="gender"
+                    defaultValue="female"
+                    name="radio-buttons-group"
+                    style={{color: '#F05A57'}}
+                >
 
+
+                    {/* map over the users array */}
+                    {test.questions[currentQuestion].answsers.map((answser) => (
+
+
+                        <div key={answser.id}>
+                            <FormControlLabel
+                                className={(test.questions[currentQuestion].selected == answser.id ? ' checked' : '')}
+                                onChange={handleOptionChange(answser.id)}
+                                checked={test.questions[currentQuestion].selected == answser.id}
+                                value={answser.id} control={<RadioQuiz/>} label={answser.label}/>
+
+
+                        </div>
+
+
+                    ))}
+                </RadioGroup></div>
+            </div>
+
+            <div className="quiz-footer">
+                <div className="quiz-actions">
+
+
+                    <ButtonCTA style={{width: '100%'}} variant="contained" size="large"
+                               disabled={test.questions[currentQuestion].selected == 0}
+                               onClick={nextQuestion()}>{currentQuestion == test.questions.length - 1 ? "View Result" : "Next"}</ButtonCTA>
+
+                </div>
+                <div className="quiz-pager">
+                    <label>{currentQuestion + 1 + " ― " + test.questions.length}</label>
+                </div>
+            </div>
+
+        </div>;
+    }
+    function results() {
+        return <div>
+            <h2>
+                Vous êtes plutôt
+            </h2>
+            <p>
+                {test.results[0].score > test.results[1].score ? test.results[0].label : test.results[1].label}
+            </p>
+
+        </div>;
+    }
 
     return (
         <div className="App ">
@@ -357,65 +415,16 @@ function App() {
 
                 </div>
 
-                <div>
-
-                    <animated.div style={props} class="quiz">
-                        <Slide direction="down" in={doSlide} mountOnEnter unmountOnExit>
-                            <div className={(animstate == 'in' ? 'quiz-form in' : 'quiz-form out')}>
-                                {/*                    total Extraverti: {test.results[0].score}<br/>
-                    total Introverti: {test.results[1].score}*/}
 
 
-                                <h2>
-                                    {test.questions[currentQuestion].question}
-                                </h2>
 
-                                <div className='quiz-answsers'><RadioGroup
-                                    aria-label="gender"
-                                    defaultValue="female"
-                                    name="radio-buttons-group"
-                                    style={{color: '#F05A57'}}
-                                >
+                    <div className={(animstate == 'in' ? 'quiz in' : 'quiz out')}>
+
+                        {showResults?results():quiz()}
+
+                    </div>
 
 
-                                    {/* map over the users array */}
-                                    {test.questions[currentQuestion].answsers.map((answser) => (
-
-
-                                        <div key={answser.id}>
-                                            <FormControlLabel
-                                                className={(test.questions[currentQuestion].selected == answser.id ? ' checked' : '')}
-                                                onChange={handleOptionChange(answser.id)}
-                                                checked={test.questions[currentQuestion].selected == answser.id}
-                                                value={answser.id} control={<RadioQuiz/>} label={answser.label}/>
-
-
-                                        </div>
-
-
-                                    ))}
-                                </RadioGroup></div>
-                            </div>
-                        </Slide>
-
-                        <div className="quiz-footer">
-                            <div className="quiz-actions">
-
-
-                                <ButtonCTA style={{width: '100%'}} variant="contained" size="large"
-                                           disabled={test.questions[currentQuestion].selected == 0}
-                                           onClick={nextQuestion()}>{currentQuestion == test.questions.length - 1 ? "View Result" : "Next"}</ButtonCTA>
-
-                            </div>
-                            <div className="quiz-pager">
-                                <label>Question {currentQuestion + 1 + "/" + test.questions.length}</label>
-                            </div>
-
-
-                        </div>
-                    </animated.div>
-
-                </div>
 
             </ThemeProvider></div>
     );

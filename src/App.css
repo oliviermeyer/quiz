@@ -1,202 +1,310 @@
 html {
-  height: 100%;
+    height: 100%;
 }
-body {
-  min-height: 100%;
-}
-body, html { overflow-x:hidden; }
 
 body {
-  color: #fff;
-  background: linear-gradient(200deg, #8B39B8 45%,  #F95544 62%);
-  background-size: 300% 300%;
-  -webkit-animation: Gradient 15s ease infinite;
-  -moz-animation: Gradient 15s ease infinite;
-  animation: Gradient 15s ease infinite;
+    min-height: 100%;
+}
+
+body, html {
+    overflow-x: hidden;
+}
+
+body {
+    color: #fff;
+    background: linear-gradient(200deg, #8B39B8 45%, #F95544 62%);
+    background-size: 300% 300%;
+    -webkit-animation: Gradient 15s ease infinite;
+    -moz-animation: Gradient 15s ease infinite;
+    animation: Gradient 15s ease infinite;
 }
 
 .paused {
-  -webkit-animation-play-state: paused; /* Safari 4.0 - 8.0 */
-  animation-play-state: paused;
+    -webkit-animation-play-state: paused; /* Safari 4.0 - 8.0 */
+    animation-play-state: paused;
 }
+
 @keyframes Gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 @-webkit-keyframes Gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 @-moz-keyframes Gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
-
 
 
 .App {
-  font-family: 'Helvetica Neue';
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-content: space-between;
+    font-family: 'Helvetica Neue';
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-content: space-between;
 }
 
-h2{
-  font-family: 'Helvetica Neue';
-  font-weight: 100;
-  font-size: 3.75rem;
-  line-height: 1.2;
-  text-align: center;
+h2 {
+    font-family: 'Helvetica Neue';
+    font-weight: 100;
+    font-size: 3.75rem;
+    line-height: 1.2;
+    text-align: center;
 }
 
 @media screen and (max-width: 640px) {
-  h2{
-    font-weight: 300;
-    font-size: 1.7rem;
-    line-height: 1.334;
-
-  }
+    h2 {
+        font-weight: 300;
+        font-size: 1.7rem;
+        line-height: 1.334;
+    }
 }
 
-.topnav{
-  width: 100%;
-  position: absolute;
-  display: flex;
-  justify-content: space-between;
-  align-content: center;
-  height: 52px;
-}
-.quiz{
-  max-width: 60rem;
-  align-items: center;
+.topnav {
+    width: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    height: 52px;
 }
 
+.quiz {
+    max-width: 60rem;
+    align-items: center;
+    text-align: center;
+}
 
 
-.quiz{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  padding: 4rem 2rem;
+.quiz {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: 4rem 2rem;
 
 }
 
-.css-kswqkt{
-
-}
-.quiz-form{
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  animation-duration: 0.3s;
-  -webkit-animation-duration: 0.3s;
-
-  animation-timing-function: ease-out;
-  -webkit-animation-timing-function: ease-out;
+.quiz-form {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    animation-duration: 0.3s;
+    -webkit-animation-duration: 0.3s;
+    animation-timing-function: ease-out;
+    -webkit-animation-timing-function: ease-out;
 }
 
-.quiz-form.in{
-  animation-name: slideDown;
-  -webkit-animation-name: slideDown;
+.in .quiz-form {
+    animation-name: slideDown;
+    -webkit-animation-name: slideDown;
+}
 
+.out .quiz-form {
+    animation-name: slideUp;
+    -webkit-animation-name: slideUp;
+
+}
+.quiz-footer {
+    max-width: 36rem;
+    width: 100%;
+    animation-duration: 1s;
+    -webkit-animation-duration: 1s;
+    animation-timing-function: ease-out;
+    -webkit-animation-timing-function: ease-out;
+
+}
+.out .quiz-footer {
+    animation-name: fadeIn;
+    -webkit-animation-name: fadeIn;
+
+
+}
+
+.in .quiz-footer {
+    animation-name: fadeOut;
+    -webkit-animation-name: fadeOut;
 
 }
 
 @keyframes slideDown {
-  0% {
-    transform: translateY(0%);
-    opacity: 100%;
-  }
+    0% {
+        transform: translateY(0%);
+        opacity: 100%;
+    }
 
-  100% {
-    transform: translateY(100%);
-    opacity: 0%;
-  }
+    100% {
+        transform: translateY(100%);
+        opacity: 0%;
+    }
 }
+
 @keyframes slideUp {
-  0% {
-    transform: translateY(100%);
-    opacity: 0%;
-  }
+    0% {
+        transform: translateY(100%);
+        opacity: 0%;
+    }
 
-  100% {
-    transform: translateY(0%);
-    opacity: 100%;
-  }
-}
-.quiz-form.out{
-  animation-name: slideUp;
-  -webkit-animation-name: slideUp;
-
+    100% {
+        transform: translateY(0%);
+        opacity: 100%;
+    }
 }
 
-
-.quiz-answsers{
-  max-width: 36rem;
-  width: 100%;
-  margin: 2rem 0;
+@keyframes fadeIn {
+    0% {
+        opacity: 0%;
+    }
+    100% {
+        opacity: 100%;
+    }
 }
 
-.MuiFormControlLabel-root{
-  border:1px solid rgba(255,255,255,.7);
-  border-radius: 14px;
-  padding: 0.7rem;
-  color:white;
-  margin: 0 0 1rem 0 !important;
-  width: 100%;
-
-}
- .MuiFormControlLabel-root.checked{
-  background-color: white;
-  color:#EB5A5D;
-}
-.MuiFormControlLabel-root.checked .css-hyxlzm{
-  color:#EB5A5D;
+@-moz-keyframes fadeIn {
+    0% {
+        opacity: 0%;
+    }
+    100% {
+        opacity: 100%;
+    }
 }
 
-
-
-.quiz-footer{
-  max-width: 36rem;
-  width: 100%;
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0%;
+    }
+    100% {
+        opacity: 100%;
+    }
 }
 
-.quiz-actions{
-  padding:  0;
-  display: flex;
-  justify-content: space-between;
-}
-.quiz-footer button{
-  width: 100%;
+@-o-keyframes fadeIn {
+    0% {
+        opacity: 0%;
+    }
+    100% {
+        opacity: 100%;
+    }
 }
 
-.quiz-pager{
-  padding:  1rem;
-  display: flex;
-  justify-content: space-around;
+@-ms-keyframes fadeIn {
+    0% {
+        opacity:  0%;
+    }
+    100% {
+        opacity: 100%;
+    }
+}
+@keyframes fadeOut {
+    0% {
+        opacity: 100%;
+    }
+    100% {
+        opacity: 0%;
+    }
+}
+
+@-moz-keyframes fadeOut {
+    0% {
+        opacity: 100%;
+    }
+    100% {
+        opacity: 0%;
+    }
+}
+
+@-webkit-keyframes fadeOut {
+    0% {
+        opacity: 100%;
+    }
+    100% {
+        opacity: 0%;
+    }
+}
+
+@-o-keyframes fadeOut {
+    0% {
+        opacity: 100%;
+    }
+    100% {
+        opacity: 0%;
+    }
+}
+
+@-ms-keyframes fadeOut {
+    0% {
+        opacity: 100%;
+    }
+    100% {
+        opacity: 0%;
+    }
+}
+
+.quiz-answsers {
+    max-width: 36rem;
+    width: 100%;
+    margin: 2rem 0;
+}
+
+.MuiFormControlLabel-root {
+    border: 1px solid rgba(255, 255, 255, .7);
+    border-radius: 14px;
+    padding: 0.7rem;
+    color: white;
+    margin: 0 0 1rem 0 !important;
+    width: 100%;
+
+}
+
+.MuiFormControlLabel-root.checked {
+    background-color: white;
+    color: #EB5A5D;
+}
+
+.MuiFormControlLabel-root.checked .css-hyxlzm {
+    color: #EB5A5D;
+}
+
+
+
+
+.quiz-actions {
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.quiz-footer button {
+    width: 100%;
+}
+
+.quiz-pager {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-around;
 }
