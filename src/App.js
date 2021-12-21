@@ -315,7 +315,7 @@ function App() {
         setAnchorEl(null);
     };
     function quiz() {
-        return <div>
+        return <div className="quiz">
             <div className="quiz-form">
                 <h2>
                     {test.questions[currentQuestion].question}
@@ -365,7 +365,7 @@ function App() {
         </div>;
     }
     function results() {
-        return <div>
+        return <div className="quiz-results">
             <h2>
                 Vous êtes plutôt
             </h2>
@@ -418,7 +418,7 @@ function App() {
 
 
 
-                    <div className={(animstate == 'in' ? 'quiz in' : 'quiz out')}>
+                    <div className={(animstate == 'in' ? ' in' : ' out')}>
 
                         {showResults?results():quiz()}
 
